@@ -3,6 +3,9 @@ import express, { Request, Response, RequestHandler } from "express";
 import { OpenAI } from "openai";
 import internalOrderQAResults from "./internalOrderQAResults";
 
+// TODO: Add a WORKFLOW FOR EXPORTING FILES TO DOWNLOADS AND REOPENING 
+
+
 dotenv.config();
 
 const app = express();
