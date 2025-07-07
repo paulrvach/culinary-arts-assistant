@@ -1,4 +1,42 @@
-{
+// Types for the internal order QA results
+export interface Media {
+  type: string;
+  alt_text: string;
+  url: string;
+}
+
+export interface QAResponse {
+  question: string;
+  answer: string;
+  steps: string[];
+  url: string;
+  media: Media;
+}
+
+export interface QAResult {
+  question_number: number;
+  question: string;
+  timestamp: string;
+  success: boolean;
+  response: QAResponse;
+  error: string | null;
+}
+
+export interface QAMetadata {
+  created_at: string;
+  total_questions: number;
+  endpoint: string;
+  completed_at: string;
+  completed_questions: number;
+}
+
+export interface InternalOrderQAResults {
+  metadata: QAMetadata;
+  results: QAResult[];
+}
+
+// The actual QA results data
+export const internalOrderQAResults: InternalOrderQAResults = {
   "metadata": {
     "created_at": "2025-07-07T20:08:00.122Z",
     "total_questions": 10,
@@ -272,4 +310,7 @@
       "error": null
     }
   ]
-}
+};
+
+// Default export
+export default internalOrderQAResults; 

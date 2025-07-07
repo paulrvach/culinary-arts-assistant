@@ -1,8 +1,7 @@
 import dotenv from "dotenv";
 import express, { Request, Response, RequestHandler } from "express";
 import { OpenAI } from "openai";
-import * as fs from "fs";
-import * as path from "path";
+import internalOrderQAResults from "./internalOrderQAResults";
 
 dotenv.config();
 
@@ -88,21 +87,9 @@ app.get("/api/internal-order-qa", (async (
   res: Response<any>
 ) => {
   try {
-    const filePath = path.join(__dirname, "internal_order_qa_results.json");
-    
-    // Check if file exists
-    if (!fs.existsSync(filePath)) {
-      res.status(404).json({ error: "Internal order QA results file not found" });
-      return;
-    }
-
-    // Read and parse the JSON file
-    const fileContent = fs.readFileSync(filePath, "utf-8");
-    const qaResults = JSON.parse(fileContent);
-
-    res.json(qaResults);
+    res.json(internalOrderQAResults);
   } catch (error) {
-    console.error("Error reading internal order QA results:", error);
+    console.error("Error serving internal order QA results:", error);
     res.status(500).json({ error: "Failed to load internal order QA results" });
   }
 }) as RequestHandler);
